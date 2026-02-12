@@ -1,30 +1,85 @@
-# React + TypeScript + Vite
+🧠 Kylo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Build focus. Ship faster.
 
-Currently, two official plugins are available:
+Kylo is an AI-powered productivity execution layer built with Electron + React + Supabase.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+It helps you break work into structured tasks, manage projects, and execute with clarity — powered by intelligent assistance.
 
-## Expanding the ESLint configuration
+🌐 Landing: https://kylo.buildify-web.com
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+⸻
 
-- Configure the top-level `parserOptions` property like this:
+🚀 What is Kylo?
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Kylo is not just a task manager.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+It is a focused execution environment that combines:
+	•	🗂 Project-based organization
+	•	✅ Task & subtask management
+	•	🎯 Priority marking
+	•	🧠 AI-assisted task breakdown
+	•	🔐 Secure authentication
+	•	☁️ Supabase backend persistence
+
+Designed to feel minimal. Built to scale.
+
+⸻
+
+✨ Core Features
+
+📁 Projects
+	•	Color-based project creation
+	•	Default Inbox for general tasks
+	•	Automatic project-based filtering
+	•	Persistent storage via Supabase
+
+✅ Tasks
+	•	Add / Delete tasks
+	•	Mark as complete
+	•	Toggle important (⭐)
+	•	Deadline support
+	•	Estimated duration (minutes)
+
+🔎 Subtasks
+	•	Nested subtasks
+	•	Individual completion toggles
+	•	Persistent relational storage
+	•	Synced across sessions
+
+🔐 Authentication
+	•	Email / Password login
+	•	Signup support
+	•	Session persistence
+	•	Secure sign out
+
+🤖 AI Layer (In Progress)
+	•	GPT-4o integration via Supabase Edge Functions
+	•	Secure Azure OpenAI backend
+	•	Planned structured task generation
+
+⸻
+
+🏗 Tech Stack
+	•	⚛ React + TypeScript
+	•	⚡ Vite
+	•	🖥 Electron
+	•	🎨 TailwindCSS
+	•	🗄 Supabase (Auth + Postgres + Edge Functions)
+	•	🤖 Azure OpenAI (GPT-4o)
+
+  PROJECTR STRUCTURE :
+
+  kylo/
+├── electron/
+│   ├── main.ts
+│   └── preload.ts
+├── src/
+│   ├── components/
+│   ├── lib/
+│   ├── types/
+│   └── App.tsx
+├── supabase/
+│   └── functions/
+├── package.json
+└── vite.config.ts
