@@ -10,6 +10,7 @@ import {
   Flag,
   ChevronDown,
   ChevronUp,
+  Play,
 } from 'lucide-react';
 
 interface TaskListProps {
@@ -20,13 +21,16 @@ interface TaskListProps {
     estimatedMinutes?: number;
     deadline?: string;
     important?: boolean;
+
   }) => void;
 
   onDeleteTask?: (taskId: string) => void;
   onToggleTaskDone?: (taskId: string) => void;
-  onToggleTaskImportant?: (taskId: string) => void;
-  onToggleSubtaskDone?: (taskId: string, subtaskId: string) => void;
+  onToggleTaskImportant?: (taskId: string , currentImportant: boolean) => void;
+  onToggleSubtaskDone?: (taskId: string, subtaskId: string, currentDone: boolean) => void;
   onAddSubtask?: (taskId: string, title: string) => void;
+  onFocusTask?: (task: Task) => void; // 👈 add this
+
 }
 
 export const TaskList = ({
@@ -37,6 +41,8 @@ export const TaskList = ({
   onToggleTaskImportant,
   onToggleSubtaskDone,
   onAddSubtask,
+  onFocusTask, // 👈 add this
+
 }: TaskListProps) => {
   const [isAdding, setIsAdding] = useState(false);
   const [title, setTitle] = useState('');
@@ -152,9 +158,9 @@ export const TaskList = ({
                     <div key={st.id} className="space-y-1">
                       <div className="flex items-center gap-2 text-xs">
                         <button
-                          onClick={() =>
-                            onToggleSubtaskDone?.(task.id, st.id)
-                          }
+                         onClick={() =>
+                          onToggleSubtaskDone?.(task.id, st.id, !st.done)
+                        }
                         >
                           {st.done ? (
                             <CheckCircle2 className="w-3.5 h-3.5 text-green-400" />
@@ -199,12 +205,22 @@ export const TaskList = ({
 
               {/* ACTIONS (bottom-left) */}
               <div className="my-2 flex items-center gap-2 pl-6">
+
+                {/* 👇 Add this focus button */}
+                <button
+                  onClick={() => onFocusTask?.(task)}
+                  className="p-1 rounded hover:bg-white/10"
+                  title="Focus on this task"
+                >
+                  <Play className="w-3.5 h-3.5 text-[#C8F135]" />
+                </button>
+                
                 <button className="p-1 rounded hover:bg-white/10">
                   <Sparkles className="w-3.5 h-3.5 text-white/40" />
                 </button>
 
                 <button
-                  onClick={() => onToggleTaskImportant?.(task.id)}
+                  onClick={() => onToggleTaskImportant?.(task.id , !task.important)}
                   className="p-1 rounded hover:bg-white/10"
                 >
                   <Flag

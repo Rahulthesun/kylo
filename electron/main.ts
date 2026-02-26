@@ -3,18 +3,12 @@ import {
   BrowserWindow,
   ipcMain,
   screen,
-  dialog,
-  clipboard,
   globalShortcut
 } from 'electron'
-import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
-import { exec } from 'child_process'
 
-const projects: { id: string; path: string }[] = []
 
-const require = createRequire(import.meta.url)
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 process.env.APP_ROOT = path.join(__dirname, '..')
@@ -36,12 +30,14 @@ function createWindow() {
   const { width, height } = primaryDisplay.workAreaSize
 
   win = new BrowserWindow({
+    titleBarStyle: 'hiddenInset', //FOR PREMIUM LOOK
+    
     width: NABBER_WIDTH,
     height: height,
     x: width - NABBER_WIDTH,
     y: 0,
 
-    frame: false,
+    frame: true,
     transparent: true,
     alwaysOnTop: true,
     skipTaskbar: false,
@@ -60,7 +56,11 @@ function createWindow() {
 
   win.setAlwaysOnTop(true, 'screen-saver')
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true })
-  win.webContents.openDevTools({ mode: 'detach' });
+  
+  //ONLY IF IT's NOT PACKAGED (DEV MODE), OPEN DEVTOOLS
+  if (!app.isPackaged) {
+    win.webContents.openDevTools({ mode: 'detach' });
+  }
 
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL)

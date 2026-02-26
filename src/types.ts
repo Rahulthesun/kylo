@@ -3,18 +3,20 @@ export interface Project {
   user_id: string;
   name: string;
   created_at: string; // timestamptz
+  color: string | null;
 }
 
 export interface Task {
   id: string;
   user_id: string;
-  project_id: string;
+  projectId: string;
 
   title: string;
-  estimated_minutes: number | null;
+  estimatedMinutes: number | null;
   deadline: string | null;
   important: boolean;
   done: boolean;
+  isActive: boolean;
   subtasks: Subtask[];
 
 
