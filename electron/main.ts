@@ -60,6 +60,7 @@ function createWindow() {
 
   win.setAlwaysOnTop(true, 'screen-saver')
   win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true })
+  win.webContents.openDevTools({ mode: 'detach' });
 
   if (VITE_DEV_SERVER_URL) {
     win.loadURL(VITE_DEV_SERVER_URL)

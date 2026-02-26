@@ -22,35 +22,12 @@ export const KyloShell = ({ user }: { user: User }) => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [activeTask, setActiveTask] = useState<ActiveTask | null>(null);
 
+  
 
- 
+  let isMounted = true;
 
-
-  useEffect(() => {
-    if (!user?.id) return;
-
-    let isMounted = true;
-
-    //Function To Ensure Inbox is the Default Project if there's no other project!!
-    const ensureDefaultProject = async () => {
-        if (projects.length > 0 || !user?.id) return;
-
-        const { data, error } = await supabase
-          .from('projects')
-          .insert({
-            user_id: user.id,
-            name: 'Inbox',
-          })
-          .select()
-          .single();
-
-        if (!error && data) {
-          setProjects([data]);
-          setSelectedProjectId(data.id);
-        }
-    };
-
-    const fetchAll = async () => {
+ const fetchAll = async () => {
+  
       try {
         // Fetch projects
         const { data: projectsData, error: projectsError } = await supabase
@@ -66,6 +43,7 @@ export const KyloShell = ({ user }: { user: User }) => {
 
         if (!isMounted) return;
 
+        console.log(`ProjectsData` , projectsData);
         setProjects(projectsData ?? []);
         
         //If No Projects , Inbox is Created & Selected as Default Project
@@ -112,13 +90,35 @@ export const KyloShell = ({ user }: { user: User }) => {
         }
 
         if (!isMounted) return;
-
+        console.log(`TaskData` , tasksData);
         setTasks(tasksData ?? []);
       } catch (err) {
         console.error('Unexpected fetch error:', err);
       }
     };
 
+    //Function To Ensure Inbox is the Default Project if there's no other project!!
+    const ensureDefaultProject = async () => {
+        if (projects.length > 0 || !user?.id) return;
+
+        const { data, error } = await supabase
+          .from('projects')
+          .insert({
+            user_id: user.id,
+            name: 'Inbox',
+          })
+          .select()
+          .single();
+
+        if (!error && data) {
+          setProjects([data]);
+          setSelectedProjectId(data.id);
+        }
+    };
+
+
+  useEffect(() => {
+    
     fetchAll();
 
     return () => {
@@ -382,6 +382,9 @@ export const KyloShell = ({ user }: { user: User }) => {
         <CommandBar 
           onSignOut={handleSignOut}
           userEmail={user?.email}
+          userId={user.id}
+          selectedProjectId={selectedProjectId}
+          onTasksCreated={fetchAll}
         />
 
         {activeTask && (
