@@ -37,7 +37,7 @@ function createWindow() {
     x: width - NABBER_WIDTH,
     y: 0,
 
-    frame: true,
+    frame: false,
     transparent: true,
     alwaysOnTop: true,
     skipTaskbar: false,
