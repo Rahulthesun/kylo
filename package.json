@@ -3,19 +3,21 @@
   "private": true,
   "version": "0.0.2",
   "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "dist": "npm run build && electron-builder",
-    "preview": "vite preview",
-    "release": "npm run build && electron-builder --mac --win -p always"
-  },
-
+  "description": "Kylo — execution-first productivity OS for focused work.",
+  "author": "rahulthesun82",
+  "license": "Proprietary",
+  "main": "dist-electron/main.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Rahulthesun/kylo"
   },
-
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "dist": "npm run build && electron-builder",
+    "release": "npm run build && electron-builder --mac -p always",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
     "electron-log": "^5.4.3",
@@ -46,23 +48,21 @@
     "vite-plugin-electron": "^0.28.6",
     "vite-plugin-electron-renderer": "^0.14.5"
   },
-  "main": "dist-electron/main.js",
-
   "build": {
     "appId": "com.kylo.desktop",
     "productName": "Kylo",
     "copyright": "© 2026 Kylo",
-    "directories": {
-      "output": "release"
-    },
-
-    "publish": [{
+    "publish": [
+      {
         "provider": "github",
         "owner": "Rahulthesun",
         "repo": "kylo",
         "releaseType": "draft"
-    }],
-
+      }
+    ],
+    "directories": {
+      "output": "release"
+    },
     "files": [
       "dist/**/*",
       "dist-electron/**/*",
@@ -72,46 +72,32 @@
       "target": [
         { "target": "dmg", "arch": ["arm64", "x64"] },
         { "target": "zip", "arch": ["arm64", "x64"] }
-      ]
-    },
+      ],
       "category": "public.app-category.productivity",
       "icon": "build/icon.icns",
-      "artifactName": "Kylo-${version}-mac.${ext}",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false
-      },
-      "dmg": {
-        "backgroundColor": "#0A0A0A",
-        "window": {
-          "width": 540,
-          "height": 380
-        }
-      },
+      "artifactName": "Kylo-${version}-mac-${arch}.${ext}"
+    },
+    "dmg": {
+      "backgroundColor": "#0A0A0A",
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
     "win": {
       "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64"
-          ]
-        }
+        { "target": "nsis", "arch": ["x64"] }
       ],
       "icon": "build/icon.ico",
       "artifactName": "Kylo-${version}-Setup.${ext}"
     },
-      "nsis": {
-        "oneClick": false,
-        "perMachine": false,
-        "allowToChangeInstallationDirectory": true,
-        "createDesktopShortcut": true,
-        "createStartMenuShortcut": true,
-        "shortcutName": "Kylo"
-      },
-
-      "description": "Kylo — execution-first productivity OS for focused work.",
-      "author": "rahulthesun82",
-      "license": "Proprietary"
-  
-      
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Kylo"
+    }
   }
-
+}

@@ -88,6 +88,9 @@ app.whenReady().then(() => {
     if (!win) return
     win.isVisible() ? win.hide() : win.show()
   })
+
+  if (!app.isPackaged) return
+    autoUpdater.checkForUpdatesAndNotify()
 })
 
 app.on('will-quit', () => {
@@ -99,12 +102,12 @@ app.setLoginItemSettings({
 })
 
 autoUpdater.logger = log
-autoUpdater.logger.transports.file.level = "info"
+log.transports.file.level = "info"
+
 
 app.whenReady().then(() => {
-  if (!app.isPackaged) return
 
-  autoUpdater.checkForUpdatesAndNotify()
+  
 })
 
 // --- HELPER: Native Paste ---

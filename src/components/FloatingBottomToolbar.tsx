@@ -8,7 +8,6 @@ interface FloatingBottomToolbarProps {
   isRunning?: boolean;
   onTogglePlay?: () => void;
   onReset?: () => void;
-  onAddTask?: () => void;
   // Music — passed from parent's usePersistentMusic
   music: {
     isPlaying: boolean;
@@ -25,7 +24,6 @@ export const FloatingBottomToolbar = ({
   isRunning = false,
   onTogglePlay,
   onReset,
-  onAddTask,
   music,
 }: FloatingBottomToolbarProps) => {
 
