@@ -267,7 +267,7 @@ const AIBrandsShowcase = () => {
 export const AuthScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [mode, setMode] = useState<'signin' | 'signup'>('signup');
+  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

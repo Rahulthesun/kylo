@@ -4,18 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-  "dev": "vite",
-  "build": "tsc && vite build",
-  "dist": "npm run build && electron-builder",
-  "preview": "vite preview"
-},
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "dist": "npm run build && electron-builder",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.95.3",
+    "electron-log": "^5.4.3",
+    "electron-updater": "^6.8.3",
     "lucide-react": "^0.563.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
-
   "devDependencies": {
     "@eslint/js": "^9.9.1",
     "@types/react": "^18.2.64",
@@ -39,7 +40,6 @@
     "vite-plugin-electron-renderer": "^0.14.5"
   },
   "main": "dist-electron/main.js",
-
   "build": {
     "appId": "com.kylo.desktop",
     "productName": "Kylo",
@@ -52,12 +52,14 @@
       "dist-electron/**/*",
       "package.json"
     ],
-
     "mac": {
       "target": [
         {
           "target": "dmg",
-          "arch": ["arm64", "x64"]
+          "arch": [
+            "arm64",
+            "x64"
+          ]
         }
       ],
       "category": "public.app-category.productivity",
@@ -66,7 +68,6 @@
       "hardenedRuntime": true,
       "gatekeeperAssess": false
     },
-
     "dmg": {
       "backgroundColor": "#0A0A0A",
       "window": {
@@ -74,18 +75,18 @@
         "height": 380
       }
     },
-
     "win": {
       "target": [
         {
           "target": "nsis",
-          "arch": ["x64"]
+          "arch": [
+            "x64"
+          ]
         }
       ],
       "icon": "build/icon.ico",
       "artifactName": "Kylo-${version}-Setup.${ext}"
     },
-
     "nsis": {
       "oneClick": false,
       "perMachine": false,
@@ -95,10 +96,7 @@
       "shortcutName": "Kylo"
     }
   },
-
-  
   "description": "Kylo — execution-first productivity OS for focused work.",
   "author": "rahulthesun82",
   "license": "Proprietary"
-  
 }

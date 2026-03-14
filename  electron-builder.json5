@@ -1,0 +1,11 @@
+{
+  "extraResources": [
+    {
+      "from": "electron/db/migrations",
+      "to": "migrations",
+      "filter": ["**/*"]
+    }
+  ],
+  "externals": ["better-sqlite3"]
+}
+ 

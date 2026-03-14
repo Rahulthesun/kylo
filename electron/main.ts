@@ -8,6 +8,10 @@ import {
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 
+import { autoUpdater } from "electron-updater"
+import log from "electron-log"
+
+
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -24,7 +28,7 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
 let win: BrowserWindow | null = null
 
 function createWindow() {
-  const NABBER_WIDTH = 300//300
+  const NABBER_WIDTH = 305//300
 
   const primaryDisplay = screen.getPrimaryDisplay()
   const { width, height } = primaryDisplay.workAreaSize
@@ -90,6 +94,18 @@ app.on('will-quit', () => {
   globalShortcut.unregisterAll()
 })
 
+app.setLoginItemSettings({
+  openAtLogin: true
+})
+
+autoUpdater.logger = log
+autoUpdater.logger.transports.file.level = "info"
+
+app.whenReady().then(() => {
+  if (!app.isPackaged) return
+
+  autoUpdater.checkForUpdatesAndNotify()
+})
 
 // --- HELPER: Native Paste ---
 /*
@@ -126,7 +142,7 @@ ipcMain.handle('window:minimize-to-bar', () => {
   const win = BrowserWindow.getFocusedWindow();
   if (!win) return;
 
-  const COLLAPSED_HEIGHT = 120;
+  const COLLAPSED_HEIGHT = 125;
 
   const display = screen.getDisplayMatching(win.getBounds());
   const { x, y, width: screenW, height: screenH } = display.workArea;
