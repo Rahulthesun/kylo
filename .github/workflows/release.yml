@@ -27,7 +27,7 @@ jobs:
 
       - name: Build & publish Mac
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         run: npm run build && npx electron-builder --mac -p always
 
   # ── Windows build (x64) ──────────────────────────────────────────────────
@@ -48,5 +48,5 @@ jobs:
 
       - name: Build & publish Windows
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN  }}
         run: npm run build && npx electron-builder --win -p always
