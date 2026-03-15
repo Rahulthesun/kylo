@@ -11,6 +11,7 @@ import type { User } from '@supabase/supabase-js';
 import { FocusMode } from './FocusMode';
 import { useTimer } from '../hooks/useTimer';
 import { usePersistentMusic } from '../hooks/usePersistentMusic';
+import { resolveAudioSrc } from '../lib/audioPath';
 
 export const KyloShell = ({ user }: { user: User }) => {
   const [isExpanded, setIsExpanded]           = useState(true);
@@ -57,6 +58,11 @@ export const KyloShell = ({ user }: { user: User }) => {
   };
 
   useEffect(() => { if (!user?.id) return; fetchAll(); }, [user?.id]);
+
+  useEffect(() => {
+  console.log('[audio debug] href:', window.location.href);
+  console.log('[audio debug] resolved:', resolveAudioSrc('assets/audio/check.mp3'));
+}, []);
 
   // ── Task actions ──────────────────────────────────────────────────────────
 

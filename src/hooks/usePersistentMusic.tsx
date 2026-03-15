@@ -18,6 +18,8 @@
 //   music.syncWithSprint — call this with isRunning — plays/pauses based on sprint state
 
 import { useRef, useCallback, useState, useEffect } from 'react';
+import { resolveAudioSrc } from '../lib/audioPath';
+
 
 export interface FlowTrack {
   id: string;
@@ -27,15 +29,15 @@ export interface FlowTrack {
 
 // ── Add your tracks here ──────────────────────────────────────────────────────
 export const FLOW_TRACKS: FlowTrack[] = [
-  { id: 'phonk1',   label: 'Phonk I',      src: '/assets/audio/flow/phonk1.mp3'   },
+  { id: 'phonk1',   label: 'Phonk I',      src: 'assets/audio/flow/phonk1.mp3'   },
   //{ id: 'phonk2',   label: 'Phonk II',     src: '/assets/audio/flow/phonk2.mp3'   },
-  { id: 'lofi1',    label: 'Lo-fi Chill',  src: '/assets/audio/flow/lofi1.mp3'    },
-  { id: 'ambient1', label: 'Ambient',      src: '/assets/audio/flow/ambient1.mp3' },
+  { id: 'lofi1',    label: 'Lo-fi Chill',  src: 'assets/audio/flow/lofi1.mp3'    },
+  { id: 'ambient1', label: 'Ambient',      src: 'assets/audio/flow/ambient1.mp3' },
   //{ id: 'focus1',   label: 'Deep Focus',   src: '/assets/audio/flow/focus1.mp3'   },
   // Add more tracks here:
   // { id: 'mytrack', label: 'My Track', src: '/assets/audio/flow/mytrack.mp3' },
 ];
-// ─────────────────────────────────────────────────────────────────────────────
+// ───────────────────────────────────────────────────────────────
 
 
 export function usePersistentMusic() {
@@ -49,7 +51,7 @@ export function usePersistentMusic() {
   // Lazily create Audio element — persists for the lifetime of the hook
   const getAudio = useCallback(() => {
     if (!audioRef.current) {
-      const a = new Audio(activeTrack.src);
+      const a = new Audio(resolveAudioSrc(activeTrack.src));
       a.loop   = true;
       a.volume = 0.5;
       audioRef.current = a;
@@ -101,7 +103,7 @@ export function usePersistentMusic() {
 
     audio.pause();
     audio.currentTime = 0;
-    audio.src = track.src;
+    audio.src = resolveAudioSrc(track.src);
     audio.load();
 
     setActiveTrackId(id);

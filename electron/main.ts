@@ -54,7 +54,8 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.mjs'),
       contextIsolation: true,
       nodeIntegration: false,
-      partition: 'persist:ai_session'
+      partition: 'persist:ai_session',
+      webSecurity: false,   // ← add this line
     }
   })
 

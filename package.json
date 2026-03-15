@@ -78,7 +78,6 @@
       "artifactName": "Kylo-${version}-mac-${arch}.${ext}"
     },
     "dmg": {
-      "backgroundColor": "#0A0A0A",
       "window": {
         "width": 540,
         "height": 380

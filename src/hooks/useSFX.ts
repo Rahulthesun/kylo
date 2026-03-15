@@ -12,10 +12,11 @@
 //   Just add entries to the SOUNDS map below.
 
 import { useRef, useCallback } from 'react';
+import { resolveAudioSrc } from '../lib/audioPath';
 
 // ── Sound registry — add your files here ──────────────────────────────────────
 const SOUNDS: Record<string, string> = {
-  check: '/assets/audio/check.mp3',
+  check: 'assets/audio/check.mp3',
   // delete: '/assets/audio/delete.mp3',
   // success: '/assets/audio/success.mp3',
 };
@@ -35,7 +36,7 @@ export function useSFX() {
     try {
       // Reuse cached element — rewind if already playing
       if (!cache.current[key]) {
-        const audio = new Audio(src);
+        const audio = new Audio(resolveAudioSrc(src));
         audio.volume = volume;
         cache.current[key] = audio;
       }

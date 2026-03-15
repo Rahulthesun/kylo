@@ -27,11 +27,15 @@ export interface FlowTrack {
   src: string;
 }
 
+import phonk1 from '../assets/audio/flow/phonk1.mp3';
+import lofi1 from '../assets/audio/flow/lofi1.mp3';
+import ambient1 from '../assets/audio/flow/ambient1.mp3';
+
 export const FLOW_TRACKS: FlowTrack[] = [
-  { id: 'phonk1',   label: 'Phonk I',      src: '/assets/audio/flow/phonk1.mp3'   },
+  { id: 'phonk1',   label: 'Phonk I',      src: phonk1   },
   //{ id: 'phonk2',   label: 'Phonk II',     src: '/assets/audio/flow/phonk2.mp3'   },
-  { id: 'lofi1',    label: 'Lo-fi Chill',  src: '/assets/audio/flow/lofi1.mp3'    },
-  { id: 'ambient1', label: 'Ambient',      src: '/assets/audio/flow/ambient1.mp3' },
+  { id: 'lofi1',    label: 'Lo-fi Chill',  src: lofi1    },
+  { id: 'ambient1', label: 'Ambient',      src: ambient1 },
   //{ id: 'focus1',   label: 'Deep Focus',   src: '/assets/audio/flow/focus1.mp3'   },
   // Add more tracks here:
   // { id: 'mytrack', label: 'My Track', src: '/assets/audio/flow/mytrack.mp3' },
