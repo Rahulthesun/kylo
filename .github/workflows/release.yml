@@ -35,20 +35,14 @@ jobs:
       - name: Build Mac
         run: npm run build && npx electron-builder --mac --publish never
 
-      - name: Show electron-builder output (debug)
-        run: find . -not -path '*/node_modules/*' -not -path '*/.git/*' \( -name '*.dmg' -o -name '*.zip' -o -name '*.blockmap' \) | sort
-
       - name: Upload Mac artifacts
         uses: actions/upload-artifact@v4
         with:
           name: mac-build
           path: |
-            dist/**/*.dmg
-            dist/**/*.zip
-            dist/**/*.blockmap
-            dist/*.dmg
-            dist/*.zip
-            dist/*.blockmap
+            release/*.dmg
+            release/*.zip
+            release/*.blockmap
           if-no-files-found: error
 
   # ── Windows build ──────────────────────────────────────────────────────
@@ -70,21 +64,14 @@ jobs:
       - name: Build Windows
         run: npm run build && npx electron-builder --win --publish never
 
-      - name: Show electron-builder output (debug)
-        shell: pwsh
-        run: Get-ChildItem -Recurse -Exclude node_modules,.git | Where-Object { $_.Extension -in '.exe','.msi','.blockmap' } | Select-Object FullName
-
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         with:
           name: win-build
           path: |
-            dist/**/*.exe
-            dist/**/*.msi
-            dist/**/*.blockmap
-            dist/*.exe
-            dist/*.msi
-            dist/*.blockmap
+            release/*.exe
+            release/*.msi
+            release/*.blockmap
           if-no-files-found: error
 
   # ── Publish ────────────────────────────────────────────────────────────
@@ -96,16 +83,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: mac-build
-          path: dist
+          path: release-assets
 
       - name: Download Windows artifacts
         uses: actions/download-artifact@v4
         with:
           name: win-build
-          path: dist
+          path: release-assets
 
-      - name: List dist (debug)
-        run: find dist -type f | sort
+      - name: List assets
+        run: find release-assets -type f | sort
 
       - name: Create GitHub Release & upload assets
         uses: softprops/action-gh-release@v2
@@ -116,10 +103,6 @@ jobs:
           prerelease: false
           generate_release_notes: true
           fail_on_unmatched_files: false
-          files: |
-            dist/**/*.dmg
-            dist/**/*.zip
-            dist/**/*.exe
-            dist/**/*.msi
+          files: release-assets/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
