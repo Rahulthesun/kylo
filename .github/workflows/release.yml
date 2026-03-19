@@ -48,6 +48,7 @@ jobs:
             release/*.dmg
             release/*.zip
             release/*.blockmap
+            release/*.yml
           if-no-files-found: error
 
   # ── Windows build ──────────────────────────────────────────────────────
@@ -82,6 +83,8 @@ jobs:
             release/*.exe
             release/*.msi
             release/*.blockmap
+            release/*.yml
+            
           if-no-files-found: error
   # ── Publish ────────────────────────────────────────────────────────────
   publish:

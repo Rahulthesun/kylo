@@ -57,7 +57,7 @@
         "provider": "github",
         "owner": "Rahulthesun",
         "repo": "kylo",
-        "releaseType": "draft"
+        "releaseType": "release"
       }
     ],
     "directories": {
